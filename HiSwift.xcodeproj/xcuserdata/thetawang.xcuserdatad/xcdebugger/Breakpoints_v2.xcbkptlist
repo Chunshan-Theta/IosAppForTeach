@@ -24,11 +24,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HiSwift/ViewController.swift"
-            timestampString = "509340749.969295"
+            timestampString = "509344962.015043"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
             landmarkName = "showMessage()"
             landmarkType = "7">
          </BreakpointContent>
