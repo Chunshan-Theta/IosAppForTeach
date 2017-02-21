@@ -10,8 +10,6 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var MainLabel: UILabel!
-    @IBOutlet weak var MainButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,14 +20,47 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    @IBAction func showMessage() {
-        MainLabel.text!="hi"
-        // show
-        let alertController = UIAlertController(title: "Welcome to My First App", message: "Hello World", preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-        self.present(alertController, animated: true, completion: nil)
+    
+    @IBOutlet weak var Mainlab: UILabel!
+    @IBAction func showMessage(_ sender: Any) {
+        Mainlab.text = "HI"
+    }
+    @IBAction func HTTPRequest(_ sender: Any) {
+        // Set up the URL request
+        let todoEndpoint: String = "https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.4.js"
+        guard let url = NSURL(string: todoEndpoint) else {
+            print("Error: cannot create URL")
+            return
+        }
+        let urlRequest = NSURLRequest(url: url as URL)
+        
+        // set up the session
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        
+        // make the request
+        let task = session.dataTask(with: urlRequest as URLRequest, completionHandler: { (data, response, error) in
+            
+            if let error = error {
+                print(error)
+            }
+            
+            if let data = data{
+                print("data =\(NSString(data: data, encoding:String.Encoding.utf8.rawValue) as String?)")
+            }
+            if let response = response {
+                
+                //print("response = \(response)")
+                let httpResponse = response as! HTTPURLResponse
+                print("response code = \(httpResponse.statusCode)")
+            }
+            
+            
+        })
+        task.resume()
         
     }
+    
     
 }
 
