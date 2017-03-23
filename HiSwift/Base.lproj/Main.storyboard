@@ -30,9 +30,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H4j-7V-aSS">
-                                <rect key="frame" x="129" y="422" width="126" height="30"/>
+                                <rect key="frame" x="114" y="422" width="147" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="HTTPButton"/>
+                                <state key="normal" title="HTTPButton_Get"/>
                                 <connections>
                                     <action selector="HTTPRequest:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BVp-Lt-NrR"/>
                                 </connections>
@@ -44,6 +44,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1xj-Qk-IzQ">
+                                <rect key="frame" x="112" y="467" width="151" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="HTTPButton_POST"/>
+                                <connections>
+                                    <action selector="POSTBUTTON:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k2T-RG-4tJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
