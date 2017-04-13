@@ -77,5 +77,12 @@ class ViewController: UIViewController {
         return ReData
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let controller = segue.destination as! Course
+        controller.PassData = "pass data hahaha"
+        
+    }
+    
+    
 }
 
