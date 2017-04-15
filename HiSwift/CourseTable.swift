@@ -8,58 +8,63 @@
 
 import UIKit
 
+var CourseList:[[String:Any]]=[]
+
 class CourseTable: UITableViewController {
 
     //var PassData:String="init"
-    var items = ["Item 1", "Item 2", "Item 3","123"]
-    var IdForCourse = [11,2,33,42]
+    var CourseNames :Array = ["Item 1", "Item 2", "Item 3","123"]
+    var IdOfCourse = [11,2,33,42]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(UserID)
+        
+        
         //get data of Course and decode json String
         let jsonString = "{\"content\":"+HTTPRequest_Get()+"}"
         let data = jsonString.data(using: .utf8)!
         if let parsedData = try? JSONSerialization.jsonObject(with: data) as! [String:Any] {
-            let Content = parsedData["content"] as! [[String:Any]]
-            let name = Content[0]["name"]!
-            print(name)
+            CourseList = parsedData["content"] as! [[String:Any]]// id , name , room
+            //let name = CourseList[0]["name"]!
+            //print(name)
+        }
+        
+        // update names and id
+        CourseNames = []
+        IdOfCourse = []
+        for CourseUnit in CourseList {
+            print(CourseUnit["name"] ?? "can't getting name")
+            CourseNames.append((CourseUnit["name"] as! String?)!)
+            IdOfCourse.append((CourseUnit["id"] as! Int?)!)
         }
         
         
+       
         
-        navigationItem.title = "hello TableView"
-        
+        navigationItem.title = "hello ! your ID :"+UserID
         tableView.register(MyCell.self, forCellReuseIdentifier: "cellId")
-        
-        
         tableView.sectionHeaderHeight = 50
         
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        return CourseNames.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let myCell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath as IndexPath) as! MyCell
-        myCell.nameLabel.text = items[indexPath.row]
+        myCell.nameLabel.text = CourseNames[indexPath.row]
         myCell.myTableViewController = self
         return myCell
     }
     
     
-    func deleteCell(cell: UITableViewCell) {
-        if let deletionIndexPath = tableView.indexPath(for: cell) {
-            items.remove(at: deletionIndexPath.row)
-            tableView.deleteRows(at: [deletionIndexPath], with: .automatic)
-        }
-    }
+
     func printH(cell: UITableViewCell){
         //print("hello world")
         let index = tableView.indexPath(for: cell)?.row ?? 11
-        print(index)
-        print(IdForCourse[index])
+        print("List Index:" + String(index))
+        print("Course ID:" + String(IdOfCourse[index]))
     }
 
     func HTTPRequest_Get()->String { // Getting data of course
@@ -117,7 +122,7 @@ class MyCell: UITableViewCell {
     
     let actionButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Delete", for: .normal)
+        button.setTitle("Detail", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
