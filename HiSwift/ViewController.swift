@@ -8,13 +8,14 @@
 
 import UIKit
 
+var UserID:String = "NoUser"
+
 class ViewController: UIViewController {
     
     @IBOutlet weak var MainLabel: UILabel!
     @IBOutlet weak var MainButton: UIButton!
     @IBOutlet weak var Input_email: UITextField!
     @IBOutlet weak var Input_pasw: UITextField!
-    var UserID:String = "NoUser"
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -77,12 +78,13 @@ class ViewController: UIViewController {
         return ReData
     }
     
+    /*
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let controller = segue.destination as! Course
+        let controller = segue.destination as! CourseTable
         controller.PassData = "pass data hahaha"
         
     }
-    
+    */
     
 }
 

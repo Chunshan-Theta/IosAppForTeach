@@ -24,7 +24,7 @@ class Course: UIViewController {
         if let parsedData = try? JSONSerialization.jsonObject(with: data) as! [String:Any] {
             let Content = parsedData["content"] as! [[String:Any]]
             let name = Content[0]["name"]!
-            print(name)
+            print(name) 
         }
         
        

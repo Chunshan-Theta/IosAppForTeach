@@ -15,6 +15,8 @@
 		283734441E5926CA00AEF4F0 /* HiSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283734431E5926CA00AEF4F0 /* HiSwiftTests.swift */; };
 		2837344F1E5926CA00AEF4F0 /* HiSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2837344E1E5926CA00AEF4F0 /* HiSwiftUITests.swift */; };
 		2839367D1E9E91DF00899745 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2839367C1E9E91DF00899745 /* Course.swift */; };
+		2839367F1E9FC4C900899745 /* SelectVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2839367E1E9FC4C900899745 /* SelectVideo.swift */; };
+		283936BD1EA0FD1A00899745 /* CourseTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283936BC1EA0FD1A00899745 /* CourseTable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		2837344E1E5926CA00AEF4F0 /* HiSwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiSwiftUITests.swift; sourceTree = "<group>"; };
 		283734501E5926CA00AEF4F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2839367C1E9E91DF00899745 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
+		2839367E1E9FC4C900899745 /* SelectVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectVideo.swift; sourceTree = "<group>"; };
+		283936BC1EA0FD1A00899745 /* CourseTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,8 @@
 				283734371E5926CA00AEF4F0 /* LaunchScreen.storyboard */,
 				2837343A1E5926CA00AEF4F0 /* Info.plist */,
 				2839367C1E9E91DF00899745 /* Course.swift */,
+				2839367E1E9FC4C900899745 /* SelectVideo.swift */,
+				283936BC1EA0FD1A00899745 /* CourseTable.swift */,
 			);
 			path = HiSwift;
 			sourceTree = "<group>";
@@ -264,7 +270,9 @@
 			files = (
 				2839367D1E9E91DF00899745 /* Course.swift in Sources */,
 				283734311E5926CA00AEF4F0 /* ViewController.swift in Sources */,
+				283936BD1EA0FD1A00899745 /* CourseTable.swift in Sources */,
 				2837342F1E5926CA00AEF4F0 /* AppDelegate.swift in Sources */,
+				2839367F1E9FC4C900899745 /* SelectVideo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
