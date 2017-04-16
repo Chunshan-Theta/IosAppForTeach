@@ -16,9 +16,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var MainButton: UIButton!
     @IBOutlet weak var Input_email: UITextField!
     @IBOutlet weak var Input_pasw: UITextField!
+    @IBOutlet weak var EnterCourseButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        EnterCourseButton.isEnabled=false
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,6 +42,7 @@ class ViewController: UIViewController {
             else{
                 MainLabel.text!="您的ＩＤ："+UserID
                 MainButton.isEnabled = false
+                EnterCourseButton.isEnabled = true
             }
             
         }

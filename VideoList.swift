@@ -1,51 +1,49 @@
 //
-//  CourseTable.swift
+//  VideoList.swift
 //  HiSwift
 //
-//  Created by Theta Wang on 2017/4/14.
+//  Created by Theta Wang on 2017/4/16.
 //  Copyright © 2017年 Theta Wang. All rights reserved.
 //
 
 import UIKit
 
-
-var SeleceCourseID:Int=0
-class CourseTable: UITableViewController {
-
+class VideoList: UITableViewController {
     //init var
-    var CourseNames :Array = ["init"]
-    var IdOfCourse = [0]
-    var CourseList:[[String:Any]]=[]
+    var VideoListData:[[String:Any]]=[]
+    var VideoIDs = [0]
+    var VideoNames = ["init"]
+    var VideoUrls = ["init"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        
         
         
         //get data of Course and decode json String
         let jsonString = "{\"content\":"+HTTPRequest_Get()+"}"
         let data = jsonString.data(using: .utf8)!
         if let parsedData = try? JSONSerialization.jsonObject(with: data) as! [String:Any] {
-            CourseList = parsedData["content"] as! [[String:Any]]// id , name , room
-            //let name = CourseList[0]["name"]!
-            //print(name)
+            VideoListData = parsedData["content"] as! [[String:Any]]//id , name , URL
+            print(VideoListData[0])
         }
         
-        // update names and id
-        CourseNames = []
-        IdOfCourse = []
-        for CourseUnit in CourseList {
-            print(CourseUnit["name"] ?? "can't getting name")
-            CourseNames.append((CourseUnit["name"] as! String?)!)
-            IdOfCourse.append((CourseUnit["id"] as! Int?)!)
+        // update names ,id and URLs
+        VideoIDs = []
+        VideoNames = []
+        VideoUrls = []
+        for VideoUnit in VideoListData {
+            print(VideoUnit["name"] ?? "can't getting name")
+            VideoNames.append((VideoUnit["name"] as! String?)!)
+            VideoUrls.append((VideoUnit["URL"] as! String?)!)
+            VideoIDs.append((VideoUnit["id"] as! Int?)!)
         }
-        tableView.register(CourseCell.self, forCellReuseIdentifier: "cellId")
+        
+        
+        //update Video
+        tableView.register(VideoCell.self, forCellReuseIdentifier: "cellId")
         tableView.sectionHeaderHeight = 50
-        
-       
-        
-        
-        
-        
         
         // goback button
         let backButton = UIBarButtonItem(
@@ -56,45 +54,36 @@ class CourseTable: UITableViewController {
         )
         
         
-        // 導覽列 update
+        // 導覽列 update        
+        navigationItem.title = "select course video"
         navigationItem.leftBarButtonItem = backButton
-        navigationItem.title = "hello ! your ID :"+UserID
+        
     }
-    
+    func goback(){
+        // go Home
+        self.dismiss(animated: true, completion:nil)
+    }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return CourseNames.count
+        return VideoNames.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let myCell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath as IndexPath) as! CourseCell
-        myCell.nameLabel.text = CourseNames[indexPath.row]
+        let myCell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath as IndexPath) as! VideoCell
+        myCell.nameLabel.text = VideoNames[indexPath.row]
         myCell.myTableViewController = self
         return myCell
     }
     
     
-    func goback(){
-        // go Home
-        self.dismiss(animated: true, completion:nil)
-    }
+    
     func printH(cell: UITableViewCell){
         //print data
-        let index = tableView.indexPath(for: cell)?.row ?? 11
-        print("List Index:" + String(index))
-        print("Course ID:" + String(IdOfCourse[index]))
-        
-        //update data
-        SeleceCourseID = IdOfCourse[index]
-        
-        // go to VideoList
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "VideoListEntrance")
-        self.present(vc!, animated: true, completion: nil)
+        print("hi")
     }
-
-    func HTTPRequest_Get()->String { // Getting data of course
+    func HTTPRequest_Get()->String {
         var ReData : String = "init"
         // Set up the URL request
-        let url = NSURL(string: "http://140.130.36.111/api/QuizsApi/Course")
+        let url = NSURL(string: "http://140.130.36.111/api/QuizsApi/getVideo?cid="+String(SeleceCourseID))
         
         let task = URLSession.shared.dataTask(with: url! as URL) {
             (data, response, error)->Void in if data != nil{
@@ -115,17 +104,15 @@ class CourseTable: UITableViewController {
         
         
     }
-    
-
-
 
 }
 
 
+
 // custom class of cell
-class CourseCell: UITableViewCell {
+class VideoCell: UITableViewCell {
     
-    var myTableViewController: CourseTable?
+    var myTableViewController: VideoList?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -146,7 +133,7 @@ class CourseCell: UITableViewCell {
     
     let actionButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Detail", for: .normal)
+        button.setTitle("video", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -155,7 +142,7 @@ class CourseCell: UITableViewCell {
         addSubview(nameLabel)
         addSubview(actionButton)
         
-        actionButton.addTarget(self, action: #selector(CourseCell.handleAction), for: .touchUpInside)
+        actionButton.addTarget(self, action: #selector(VideoCell.handleAction), for: .touchUpInside)
         
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[v0]-8-[v1(80)]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel, "v1": actionButton]))
         
@@ -170,3 +157,4 @@ class CourseCell: UITableViewCell {
     }
     
 }
+
