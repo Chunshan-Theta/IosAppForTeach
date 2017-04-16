@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+var SeleceVideoURLs:String = "init"
 class VideoList: UITableViewController {
     //init var
     var VideoListData:[[String:Any]]=[]
@@ -60,7 +60,7 @@ class VideoList: UITableViewController {
         
     }
     func goback(){
-        // go Home
+        // go Course table
         self.dismiss(animated: true, completion:nil)
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -78,7 +78,16 @@ class VideoList: UITableViewController {
     
     func printH(cell: UITableViewCell){
         //print data
-        print("hi")
+        let index = tableView.indexPath(for: cell)?.row ?? 11
+        print("List Index:" + String(index))
+        print("Course ID:" + String(VideoIDs[index]))
+        
+        //update data
+        SeleceVideoURLs = VideoUrls[index]
+        
+        // go to VideoList
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "YoutubeShow")
+        self.present(vc!, animated: true, completion: nil)
     }
     func HTTPRequest_Get()->String {
         var ReData : String = "init"
