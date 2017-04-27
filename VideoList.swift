@@ -41,9 +41,7 @@ class VideoList: UITableViewController {
         }
         
         
-        //update Video
-        tableView.register(VideoCell.self, forCellReuseIdentifier: "cellId")
-        tableView.sectionHeaderHeight = 50
+        
         
         // goback button
         let backButton = UIBarButtonItem(
@@ -53,6 +51,9 @@ class VideoList: UITableViewController {
             action: #selector(self.goback)
         )
         
+        //init custom class of Table Cell
+        tableView.register(VideoCell.self, forCellReuseIdentifier: "cellId")
+        tableView.sectionHeaderHeight = 50
         
         // 導覽列 update        
         navigationItem.title = "select course video"
@@ -63,6 +64,8 @@ class VideoList: UITableViewController {
         // go Course table
         self.dismiss(animated: true, completion:nil)
     }
+    
+    //UPDATE tableView
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return VideoNames.count
     }

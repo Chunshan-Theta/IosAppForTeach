@@ -9,10 +9,39 @@
 import UIKit
 
 class TestList: UITableViewController {
-
+    //init var
+    var TestListData:[[String:Any]]=[]
+    var TestDateTime = ["init"]
+    var Testremark = ["init"]
+    var TestName = ["init"]
+    var Testid = [0]
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(HTTPRequest_Get())
+        
+        //get data of Course and decode json String
+        let jsonString = "{\"content\":"+HTTPRequest_Get()+"}"
+        let data = jsonString.data(using: .utf8)!
+        if let parsedData = try? JSONSerialization.jsonObject(with: data) as! [String:Any] {
+            TestListData = parsedData["content"] as! [[String:Any]]//"DateTime",remark", "id", "Name"
+            print(TestListData)
+        }
+        
+        
+        // update names ,id and URLs
+        
+        TestDateTime = []
+        Testremark = []
+        TestName = []
+        Testid = []
+        for TestUnit in TestListData {
+            
+            //TestDateTime.append((TestUnit["DateTime"] as! String?)!)
+            //Testremark.append((TestUnit["remark"] as! String))
+            
+            TestName.append((TestUnit["Name"] as! String?)!)
+            Testid.append((TestUnit["id"] as! Int?)!)
+        }
+        
         
         
         // goback button
@@ -23,19 +52,42 @@ class TestList: UITableViewController {
             action: #selector(self.goback)
         )
         
+        //init custom class of Table Cell
+        tableView.register(TestCell.self, forCellReuseIdentifier: "cellId")
+        tableView.sectionHeaderHeight = 50
         
         // 導覽列 update
         navigationItem.title = "select Test"
         navigationItem.leftBarButtonItem = backButton
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    func printH(cell: UITableViewCell){
+        print("clicked!")
+        
+    }
     
-
-
+    func goback(){
+        // go Course table
+        self.dismiss(animated: true, completion:nil)
+    }
+    //UPDATE tableView
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(TestName.count)
+        return TestName.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let myCell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath as IndexPath) as! TestCell
+        myCell.nameLabel.text = TestName[indexPath.row]
+        myCell.myTableViewController = self
+        return myCell
+    }
+ 
+    
     /*
     // MARK: - Navigation
 
@@ -49,7 +101,7 @@ class TestList: UITableViewController {
         var ReData : String = "init"
         // Set up the URL request
         let url = NSURL(string: "http://140.130.36.111/api/QuizsApi/GetQuizPart?status=0&token=gldpbxbr&qid=")
-        
+
         let task = URLSession.shared.dataTask(with: url! as URL) {
             (data, response, error)->Void in if data != nil{
                 //print(NSString(data: data!, encoding: String.Encoding.utf8.rawValue) as! String)
@@ -71,25 +123,7 @@ class TestList: UITableViewController {
     }
     
     
-    func printH(cell: UITableViewCell){
-        print("clicked!")
-        //print data
-        //let index = tableView.indexPath(for: cell)?.row ?? 11
-        //print("Video Index:" + String(index))
-        //print("Video ID:" + String(VideoIDs[index]))
-        
-        //update data
-        //SeleceVideoURLs = VideoUrls[index]
-        
-        // go to VideoList
-        //let vc = self.storyboard?.instantiateViewController(withIdentifier: "YoutubeShow")
-        //self.present(vc!, animated: true, completion: nil)
-    }
-    
-    func goback(){
-        // go Course table
-        self.dismiss(animated: true, completion:nil)
-    }
+
 
 }
 
@@ -99,7 +133,7 @@ class TestList: UITableViewController {
 // custom class of cell
 class TestCell: UITableViewCell {
     
-    var myTableViewController: VideoList?
+    var myTableViewController: TestList?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -129,7 +163,7 @@ class TestCell: UITableViewCell {
         addSubview(nameLabel)
         addSubview(actionButton)
         
-        actionButton.addTarget(self, action: #selector(VideoCell.handleAction), for: .touchUpInside)
+        actionButton.addTarget(self, action: #selector(TestCell.handleAction), for: .touchUpInside)
         
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[v0]-8-[v1(80)]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel, "v1": actionButton]))
         
