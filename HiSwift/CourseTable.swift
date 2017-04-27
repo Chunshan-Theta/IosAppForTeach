@@ -54,10 +54,18 @@ class CourseTable: UITableViewController {
             target: self,
             action: #selector(self.goback)
         )
+        // goTest button
+        let TestButton = UIBarButtonItem(
+            title: "Test",
+            style: UIBarButtonItemStyle.plain,
+            target: self,
+            action: #selector(self.goTest)
+        )
         
         
         // 導覽列 update
         navigationItem.leftBarButtonItem = backButton
+        navigationItem.rightBarButtonItem = TestButton
         navigationItem.title = "hello ! your ID :"+UserID
     }
     
@@ -72,7 +80,11 @@ class CourseTable: UITableViewController {
         return myCell
     }
     
-    
+    func goTest(){
+        // go Test
+        let vc = self.storyboard?.instantiateViewController(withIdentifier:"ShowTestEntrance")
+        self.present(vc!,animated: true,completion: nil)
+    }
     func goback(){
         // go Home
         self.dismiss(animated: true, completion:nil)
