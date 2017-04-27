@@ -20,6 +20,7 @@
 		283936FB1EA3117A00899745 /* VideoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283936FA1EA3117A00899745 /* VideoList.swift */; };
 		28D17D3D1EAFD35600E03486 /* TestList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D17D3C1EAFD35600E03486 /* TestList.swift */; };
 		28D17D3F1EB24F9F00E03486 /* ShowVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D17D3E1EB24F9F00E03486 /* ShowVideo.swift */; };
+		28D17D411EB2642800E03486 /* ShowTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D17D401EB2642800E03486 /* ShowTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		283936FA1EA3117A00899745 /* VideoList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoList.swift; path = ../VideoList.swift; sourceTree = "<group>"; };
 		28D17D3C1EAFD35600E03486 /* TestList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestList.swift; sourceTree = "<group>"; };
 		28D17D3E1EB24F9F00E03486 /* ShowVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowVideo.swift; sourceTree = "<group>"; };
+		28D17D401EB2642800E03486 /* ShowTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				283936FA1EA3117A00899745 /* VideoList.swift */,
 				28D17D3C1EAFD35600E03486 /* TestList.swift */,
 				28D17D3E1EB24F9F00E03486 /* ShowVideo.swift */,
+				28D17D401EB2642800E03486 /* ShowTest.swift */,
 			);
 			path = HiSwift;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				283936FB1EA3117A00899745 /* VideoList.swift in Sources */,
 				2837342F1E5926CA00AEF4F0 /* AppDelegate.swift in Sources */,
 				2839367F1E9FC4C900899745 /* SelectVideo.swift in Sources */,
+				28D17D411EB2642800E03486 /* ShowTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

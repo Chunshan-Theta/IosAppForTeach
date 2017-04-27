@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+var SelectTestId:Int = 0
 class TestList: UITableViewController {
     //init var
     var TestListData:[[String:Any]]=[]
@@ -65,10 +65,7 @@ class TestList: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func printH(cell: UITableViewCell){
-        print("clicked!")
-        
-    }
+    
     
     func goback(){
         // go Course table
@@ -122,7 +119,21 @@ class TestList: UITableViewController {
         
     }
     
-    
+    func printH(cell: UITableViewCell){
+        print("clicked!")
+        //print data
+        let index = tableView.indexPath(for: cell)?.row ?? 11
+        print("Test Index:" + String(index))
+        print("Test ID:" + String(Testid[index]))
+        
+        //update data
+        SelectTestId = Testid[index]
+        
+        // go to VideoList
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "TestShow")
+        self.present(vc!, animated: true, completion: nil)
+        
+    }
 
 
 }
