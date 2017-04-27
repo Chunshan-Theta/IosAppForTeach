@@ -73,7 +73,6 @@ class TestList: UITableViewController {
     }
     //UPDATE tableView
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(TestName.count)
         return TestName.count
     }
     
@@ -120,7 +119,6 @@ class TestList: UITableViewController {
     }
     
     func printH(cell: UITableViewCell){
-        print("clicked!")
         //print data
         let index = tableView.indexPath(for: cell)?.row ?? 11
         print("Test Index:" + String(index))

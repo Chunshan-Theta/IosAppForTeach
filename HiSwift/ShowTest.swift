@@ -9,11 +9,12 @@
 import UIKit
 
 class ShowTest: UIViewController {
+    @IBOutlet weak var MainLabel: UILabel!
+    @IBOutlet weak var ShowImage: UIImageView!
     //init var
     var TestData:[String:Any]=[:]
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(SelectTestId)
         
         //get data of Course and decode json String
         let data = HTTPRequest_Get().data(using: .utf8)!
@@ -21,6 +22,24 @@ class ShowTest: UIViewController {
             TestData = parsedData //"Time_close","remark","DateTime","image","id"
             print(TestData["id"] ?? "error")
         }
+        
+        //show image
+        let dataDecoded:NSData = NSData(base64Encoded: TestData["image"] as! String, options: NSData.Base64DecodingOptions(rawValue: 0))!
+        if let decodedimage = UIImage(data: dataDecoded as Data){
+            //print(decodedimage)
+            ShowImage.image = decodedimage
+        }
+        else{
+            
+            MainLabel.text = "no pic , go back plz"
+        }
+        
+    
+
+        
+        
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
