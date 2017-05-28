@@ -27,12 +27,12 @@ class SelectVideo: UIViewController {
     func HTTPRequest_Get()->String {
         var ReData : String = "init"
         // Set up the URL request
-        let url = NSURL(string: "http://140.130.36.111/api/QuizsApi/getVideo?cid=11")
+        let url = NSURL(string: "http://140.130.36.46/api/QuizsApi/getVideo?cid=11")
         
         let task = URLSession.shared.dataTask(with: url! as URL) {
             (data, response, error)->Void in if data != nil{
                 //print(NSString(data: data!, encoding: String.Encoding.utf8.rawValue) as! String)
-                ReData = NSString(data: data!, encoding: String.Encoding.utf8.rawValue) as! String
+                ReData = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)! as String
                 
             }else{print("no data error") }
             

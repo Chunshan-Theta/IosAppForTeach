@@ -18,21 +18,29 @@ class ShowTest: UIViewController {
         
         //get data of Course and decode json String
         let data = HTTPRequest_Get().data(using: .utf8)!
-        if let parsedData = try? JSONSerialization.jsonObject(with: data) as! [String:Any] {
-            TestData = parsedData //"Time_close","remark","DateTime","image","id"
+        print(data)
+        if let parsedData = try? JSONSerialization.jsonObject(with: data) as! [[String:Any]] {
+            TestData = parsedData[0] //"Time_close","remark","DateTime","image","id","path"
             print(TestData["id"] ?? "error")
+            print(TestData["path"] ?? "error")
         }
-        
-        //show image
-        let dataDecoded:NSData = NSData(base64Encoded: TestData["image"] as! String, options: NSData.Base64DecodingOptions(rawValue: 0))!
-        if let decodedimage = UIImage(data: dataDecoded as Data){
-            //print(decodedimage)
-            ShowImage.image = decodedimage
+        var target_path :String = "init"
+        if String(describing: TestData["path"]) != ""{
+            target_path = "http://140.130.33.228"+(TestData["path"] as! String)
+            target_path = "http://play.fisher-price.com/en_US/Images/lnl_123_game_tcm1404-73099.png"
+            print(target_path)
         }
         else{
-            
-            MainLabel.text = "no pic , go back plz"
+            MainLabel.text = "no pic"
         }
+        if let url = NSURL(string: target_path ) {
+                if let data = NSData(contentsOf: url as URL) {
+                    
+                    ShowImage.image = UIImage(data: data as Data)
+                }        
+        }
+        
+        
         
     
 
@@ -65,12 +73,11 @@ class ShowTest: UIViewController {
     func HTTPRequest_Get()->String {
         var ReData : String = "init"
         // Set up the URL request
-        let url = NSURL(string: "http://140.130.36.111/api/QuizsApi/GetQuiz?id="+String(SelectTestId))
-        
+        let url = NSURL(string: "http://140.130.36.46/api/QuizsApi/GetQuizPart?status=0&token=null&qid="+String(SelectTestId))
         let task = URLSession.shared.dataTask(with: url! as URL) {
             (data, response, error)->Void in if data != nil{
                 //print(NSString(data: data!, encoding: String.Encoding.utf8.rawValue) as! String)
-                ReData = NSString(data: data!, encoding: String.Encoding.utf8.rawValue) as! String
+                ReData = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)! as String
                 
             }else{print("no data error") }
             
