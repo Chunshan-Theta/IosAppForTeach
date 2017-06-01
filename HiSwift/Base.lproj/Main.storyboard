@@ -135,10 +135,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WLX-GA-rTI">
-                                <rect key="frame" x="16" y="115" width="343" height="453"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="繳交試卷" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dn8-6a-4jJ">
                                 <rect key="frame" x="139" y="28" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -158,6 +154,9 @@
                                 <rect key="frame" x="313" y="28" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="上傳"/>
+                                <connections>
+                                    <action selector="UploadIMG:" destination="AJ9-o9-hac" eventType="touchUpInside" id="Gwz-tM-kpC"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rQF-8J-JGs">
                                 <rect key="frame" x="164" y="576" width="46" height="30"/>
@@ -167,10 +166,15 @@
                                     <action selector="TakeAPhoto:" destination="AJ9-o9-hac" eventType="touchUpInside" id="4Y9-q3-Akm"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WLX-GA-rTI">
+                                <rect key="frame" x="24" y="115" width="343" height="453"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="MainLabel" destination="dn8-6a-4jJ" id="L8J-pt-eoJ"/>
                         <outlet property="imageView" destination="WLX-GA-rTI" id="S01-eS-xEi"/>
                     </connections>
                 </viewController>

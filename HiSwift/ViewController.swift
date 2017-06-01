@@ -53,8 +53,14 @@ class ViewController: UIViewController {
         // Set up the URL request
         var request = URLRequest(url: URL(string: "http://140.130.36.46/api/AccountApi/getToken")!)
         request.httpMethod = "POST"
-        let postString = "email="+Input_email.text!+"&pswd="+Input_pasw.text!
-        request.httpBody = postString.data(using: .utf8)
+        let param = [
+            "email"  : Input_email.text!,
+            "pswd"    : Input_pasw.text!
+        ] as [String : Any]
+        
+        request.httpBody = createBodyWithParameters(parameters: param as? [String : String]) as Data
+        print(String(data: request.httpBody!, encoding: String.Encoding.utf8) ?? "gg")
+        
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {                                                 // check for fundamental networking error
                 print("error=\(String(describing: error))")
@@ -88,6 +94,43 @@ class ViewController: UIViewController {
         
     }
     */
+    func createBodyWithParameters(parameters: [String: String]?) -> NSData {
+        let body = NSMutableData();
+        
+        if parameters != nil {
+            for (key, value) in parameters! {
+                body.appendString(string: "\(key)=\(value)")
+                body.appendString(string: "&")
+            }
+        }
+        
+        //let filename = "user-profile.jpg"
+        //let mimetype = "image/jpg"
+        
+        //body.appendString(string: "--\(boundary)\r\n")
+        //body.appendString(string: "Content-Disposition: form-data; name=\"\(filePathKey!)\"; filename=\"\(filename)\"\r\n")
+        //body.appendString(string: "Content-Type: \(mimetype)\r\n\r\n")
+        //body.append(imageDataKey as Data)
+        //body.appendString(string: "\r\n")
+        
+        
+        
+        //body.appendString(string: "--\(boundary)--\r\n")
+        
+        return body
+    }
     
+    
+
+
+
 }
+extension NSMutableData {
+
+        func appendString(string: String) {
+            let data = string.data(using: String.Encoding.utf8, allowLossyConversion: true)
+           append(data!)
+        }
+}
+
 
