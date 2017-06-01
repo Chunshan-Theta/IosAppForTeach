@@ -22,6 +22,7 @@
 		28D17D3D1EAFD35600E03486 /* TestList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D17D3C1EAFD35600E03486 /* TestList.swift */; };
 		28D17D3F1EB24F9F00E03486 /* ShowVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D17D3E1EB24F9F00E03486 /* ShowVideo.swift */; };
 		28D17D411EB2642800E03486 /* ShowTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D17D401EB2642800E03486 /* ShowTest.swift */; };
+		7662CF511EE0175200AAB89F /* TakePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662CF501EE0175200AAB89F /* TakePhoto.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		28D17D3C1EAFD35600E03486 /* TestList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestList.swift; sourceTree = "<group>"; };
 		28D17D3E1EB24F9F00E03486 /* ShowVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowVideo.swift; sourceTree = "<group>"; };
 		28D17D401EB2642800E03486 /* ShowTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowTest.swift; sourceTree = "<group>"; };
+		7662CF501EE0175200AAB89F /* TakePhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TakePhoto.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 				28D17D3C1EAFD35600E03486 /* TestList.swift */,
 				28D17D3E1EB24F9F00E03486 /* ShowVideo.swift */,
 				28D17D401EB2642800E03486 /* ShowTest.swift */,
+				7662CF501EE0175200AAB89F /* TakePhoto.swift */,
 			);
 			path = HiSwift;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				2839367D1E9E91DF00899745 /* Course.swift in Sources */,
 				283734311E5926CA00AEF4F0 /* ViewController.swift in Sources */,
 				28D17D3F1EB24F9F00E03486 /* ShowVideo.swift in Sources */,
+				7662CF511EE0175200AAB89F /* TakePhoto.swift in Sources */,
 				28D17D3D1EAFD35600E03486 /* TestList.swift in Sources */,
 				283936BD1EA0FD1A00899745 /* CourseTable.swift in Sources */,
 				283936FB1EA3117A00899745 /* VideoList.swift in Sources */,
