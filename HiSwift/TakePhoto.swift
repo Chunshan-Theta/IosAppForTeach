@@ -11,14 +11,14 @@ import UIKit
 class TakePhoto: UIViewController , UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     @IBOutlet weak var imageView: UIImageView!
     var imagePicker: UIImagePickerController!
-
+    var origImage:UIImage!
     override func viewDidLoad() {
         super.viewDidLoad()
         let PNG404_path = "https://assets.weeblr.net/images/products/sh404sef/2015-10-14/medium/joomla-404-error-page.png"
         let url404 = NSURL(string: PNG404_path)
         let data404 = NSData(contentsOf: url404! as URL)
         imageView.image = UIImage(data: data404! as Data)
-        
+        origImage = UIImage(data: data404! as Data)
     }
     
     override func didReceiveMemoryWarning() {
@@ -41,28 +41,35 @@ class TakePhoto: UIViewController , UINavigationControllerDelegate, UIImagePicke
         present(imagePicker, animated: true, completion: nil)
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let origImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        origImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         imageView.image = origImage
         self.dismiss(animated: true, completion: nil)
         
     }
     @IBAction func UploadIMG(_ sender: Any) {
         _ = HTTPRequest_Post()
+        simpleHint()
     }
     @IBOutlet weak var MainLabel: UITextField!
     
     func HTTPRequest_Post()->String{
         var ReData : String = "init"
         // Set up the URL request
-        var request = URLRequest(url: URL(string: "https://140.130.36.46/api/QuizsApi/PostAnswer")!)
+        var request = URLRequest(url: URL(string: TargetServer+"QuizsApi/PostImage")!)
         request.httpMethod = "POST"
+        let boundary = "Boundary-\(UUID().uuidString)"
+        request.setValue("multipart/form-data;boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         let param = [
             "myname"  : "name",
             "qid"    : String(SelectTestId),
             "token"  : String(UserID)!
             ] as [String : Any]
-        let imageData = UIImageJPEGRepresentation(imageView.image!, 1)
-        request.httpBody = createBodyWithParameters(parameters: param as? [String : String], imageDataKey:imageData! as NSData) as Data
+        
+        request.httpBody = createBody(parameters: param as! [String : String],
+                                      boundary: boundary,
+                                      data: UIImageJPEGRepresentation(origImage, 0.7)!,
+                                      mimeType: "image/jpg",
+                                      filename: "hello.jpg")
         //print(String(data: request.httpBody!, encoding: String.Encoding.utf8) ?? "gg")
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -87,8 +94,8 @@ class TakePhoto: UIViewController , UINavigationControllerDelegate, UIImagePicke
         while ReData == "init"{
             //print("wait responds")
         }
-        let StringRange = ReData.index(ReData.startIndex, offsetBy: 1)..<ReData.index(ReData.startIndex, offsetBy: ReData.lengthOfBytes(using: .utf8)-1)
-        ReData = ReData.substring(with: StringRange)   // Hello
+        //let StringRange = ReData.index(ReData.startIndex, offsetBy: 1)..<ReData.index(ReData.startIndex, offsetBy: ReData.lengthOfBytes(using: .utf8)-1)
+        //ReData = ReData.substring(with: StringRange)   // Hello
         
         return ReData
     }
@@ -100,34 +107,60 @@ class TakePhoto: UIViewController , UINavigationControllerDelegate, UIImagePicke
      
      }
      */
-    func createBodyWithParameters(parameters: [String: String]?,imageDataKey: NSData) -> NSData {
-        let body = NSMutableData();
+    func createBody(parameters: [String: String],
+                    boundary: String,
+                    data: Data,
+                    mimeType: String,
+                    filename: String) -> Data {
+        let body = NSMutableData()
         
-        if parameters != nil {
-            for (key, value) in parameters! {
-                body.appendString(string: "\(key)=\(value)")
-                body.appendString(string: "&")
-            }
+        let boundaryPrefix = "--\(boundary)\r\n"
+        
+        for (key, value) in parameters {
+            body.appendString(boundaryPrefix)
+            body.appendString("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+            body.appendString("\(value)\r\n")
         }
         
-        //let filename = "user-profile.jpg"
-        //let mimetype = "image/jpg"
+        body.appendString(boundaryPrefix)
+        body.appendString("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n")
+        body.appendString("Content-Type: \(mimeType)\r\n\r\n")
+        body.append(data)
+        body.appendString("\r\n")
+        body.appendString("--".appending(boundary.appending("--")))
         
-        //body.appendString(string: "--\(boundary)\r\n")
-        //body.appendString(string: "Content-Disposition: form-data; name=\"\(filePathKey!)\"; filename=\"\(filename)\"\r\n")
-        //body.appendString(string: "Content-Type: \(mimetype)\r\n\r\n")
-        body.appendString(string:"image=")
-        body.append(imageDataKey as Data)
-        //body.appendString(string: "\r\n")
-        
-        
-        
-        //body.appendString(string: "--\(boundary)--\r\n")
-        
-        return body
+        return body as Data
     }
     
+    func simpleHint() {
+        // 建立一個提示框
+        let alertController = UIAlertController(
+            title: "提示",
+            message: "Action is done.",
+            preferredStyle: .alert)
+        
+        // 建立[確認]按鈕
+        let okAction = UIAlertAction(
+            title: "確認",
+            style: .default,
+            handler: {
+                (action: UIAlertAction!) -> Void in
+                print("按下確認後，閉包裡的動作")
+        })
+        alertController.addAction(okAction)
+        
+        // 顯示提示框
+        self.present(
+            alertController,
+            animated: true,
+            completion: nil)
+    }
 }
 
-
+extension NSMutableData {
+    func appendString(_ string: String) {
+        let data = string.data(using: String.Encoding.utf8, allowLossyConversion: false)
+        append(data!)
+    }
+}
     

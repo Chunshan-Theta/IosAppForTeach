@@ -51,7 +51,7 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>140.130.36.46</key>
+			<key>http://iselearn.im.nfu.edu.tw/</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>

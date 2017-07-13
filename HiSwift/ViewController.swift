@@ -9,6 +9,7 @@
 import UIKit
 
 var UserID:String = "NoUser"
+let TargetServer = "http://iselearn.im.nfu.edu.tw/api/"
 
 class ViewController: UIViewController {
     
@@ -51,7 +52,7 @@ class ViewController: UIViewController {
     func HTTPRequest_Post()->String{
         var ReData : String = "init"
         // Set up the URL request
-        var request = URLRequest(url: URL(string: "http://140.130.36.46/api/AccountApi/getToken")!)
+        var request = URLRequest(url: URL(string: TargetServer+"AccountApi/getToken")!)
         request.httpMethod = "POST"
         let param = [
             "email"  : Input_email.text!,

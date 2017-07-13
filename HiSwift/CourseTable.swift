@@ -106,7 +106,7 @@ class CourseTable: UITableViewController {
     func HTTPRequest_Get()->String { // Getting data of course
         var ReData : String = "init"
         // Set up the URL request
-        let url = NSURL(string: "http://140.130.36.46/api/QuizsApi/Course")
+        let url = NSURL(string: TargetServer+"QuizsApi/Course")
         
         let task = URLSession.shared.dataTask(with: url! as URL) {
             (data, response, error)->Void in if data != nil{

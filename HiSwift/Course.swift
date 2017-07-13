@@ -38,7 +38,7 @@ class Course: UIViewController {
     func HTTPRequest_Get()->String {
         var ReData : String = "init"
         // Set up the URL request
-        let url = NSURL(string: "http://140.130.36.46/api/QuizsApi/Course")
+        let url = NSURL(string: TargetServer+"AccountApi/Course")
         
         let task = URLSession.shared.dataTask(with: url! as URL) {
             (data, response, error)->Void in if data != nil{

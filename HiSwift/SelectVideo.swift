@@ -27,7 +27,7 @@ class SelectVideo: UIViewController {
     func HTTPRequest_Get()->String {
         var ReData : String = "init"
         // Set up the URL request
-        let url = NSURL(string: "http://140.130.36.46/api/QuizsApi/getVideo?cid=11")
+        let url = NSURL(string: TargetServer+"QuizsApi/getVideo?cid=11")
         
         let task = URLSession.shared.dataTask(with: url! as URL) {
             (data, response, error)->Void in if data != nil{

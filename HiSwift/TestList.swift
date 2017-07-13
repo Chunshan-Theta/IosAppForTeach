@@ -52,6 +52,14 @@ class TestList: UITableViewController {
             action: #selector(self.goback)
         )
         
+        // goback button
+        let nextButton = UIBarButtonItem(
+            title: "Past Exam",
+            style: UIBarButtonItemStyle.plain,
+            target: self,
+            action: #selector(self.goNext)
+        )
+        
         //init custom class of Table Cell
         tableView.register(TestCell.self, forCellReuseIdentifier: "cellId")
         tableView.sectionHeaderHeight = 50
@@ -59,6 +67,7 @@ class TestList: UITableViewController {
         // 導覽列 update
         navigationItem.title = "select Test"
         navigationItem.leftBarButtonItem = backButton
+        navigationItem.rightBarButtonItem = nextButton
     }
     
     override func didReceiveMemoryWarning() {
@@ -71,6 +80,13 @@ class TestList: UITableViewController {
         // go Course table
         self.dismiss(animated: true, completion:nil)
     }
+    func goNext(){
+        // go old test
+        // let vc = self.storyboard?.instantiateViewController(withIdentifier:"ShowTestEntrance")
+        // self.present(vc!,animated: true,completion: nil)    
+    }
+    
+    
     //UPDATE tableView
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return TestName.count
@@ -96,7 +112,7 @@ class TestList: UITableViewController {
     func HTTPRequest_Get()->String {
         var ReData : String = "init"
         // Set up the URL request
-        let url = NSURL(string: "http://140.130.36.46/api/QuizsApi/GetQuizPart?status=0&token=gldpbxbr&qid=")
+        let url = NSURL(string: TargetServer+"QuizsApi/GetQuizPart?status=1&token=null&qid=null")
 
         let task = URLSession.shared.dataTask(with: url! as URL) {
             (data, response, error)->Void in if data != nil{
