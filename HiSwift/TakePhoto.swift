@@ -49,6 +49,7 @@ class TakePhoto: UIViewController , UINavigationControllerDelegate, UIImagePicke
     @IBAction func UploadIMG(_ sender: Any) {
         _ = HTTPRequest_Post()
         simpleHint()
+        
     }
     @IBOutlet weak var MainLabel: UITextField!
     

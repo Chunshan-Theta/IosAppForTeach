@@ -120,7 +120,6 @@ class VideoList: UITableViewController {
 }
 
 
-
 // custom class of cell
 class VideoCell: UITableViewCell {
     

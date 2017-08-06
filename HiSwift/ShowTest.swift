@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+var AnswerOption = 1
 class ShowTest: UIViewController {
     @IBOutlet weak var MainLabel: UILabel!
     @IBOutlet weak var ShowImage: UIImageView!
@@ -75,6 +75,17 @@ class ShowTest: UIViewController {
         self.dismiss(animated: true, completion:nil)
     }
     
+    @IBAction func goNext(_ sender: Any) {
+        if AnswerOption == 1{
+            // go Test
+            let vc = self.storyboard?.instantiateViewController(withIdentifier:"AnswerTest")
+            self.present(vc!,animated: true,completion: nil)
+        }
+        else{
+            simpleHint()
+        }
+        
+    }
 
     /*
     // MARK: - Navigation
@@ -107,5 +118,28 @@ class ShowTest: UIViewController {
         return ReData
         
         
+    }
+    func simpleHint() {
+        // 建立一個提示框
+        let alertController = UIAlertController(
+            title: "提示",
+            message: "非可繳卷時間",
+            preferredStyle: .alert)
+        
+        // 建立[確認]按鈕
+        let okAction = UIAlertAction(
+            title: "確認",
+            style: .default,
+            handler: {
+                (action: UIAlertAction!) -> Void in
+                print("按下確認後，閉包裡的動作")
+        })
+        alertController.addAction(okAction)
+        
+        // 顯示提示框
+        self.present(
+            alertController,
+            animated: true,
+            completion: nil)
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -72,6 +72,41 @@
             </objects>
             <point key="canvasLocation" x="3434" y="826"/>
         </scene>
+        <!--Root View Controller-->
+        <scene sceneID="7YK-3s-4L3">
+            <objects>
+                <tableViewController id="Jnr-sK-pZZ" customClass="PastTest" customModule="HiSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ze2-Zu-8Ng">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="Jnr-sK-pZZ" id="rDk-MN-cVX"/>
+                            <outlet property="delegate" destination="Jnr-sK-pZZ" id="W8A-fL-Nam"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="wZI-0m-emr"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tbb-UY-EYJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3433" y="1648"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="j24-Nh-Hvz">
+            <objects>
+                <navigationController storyboardIdentifier="PastTestEntrance" useStoryboardIdentifierAsRestorationIdentifier="YES" id="MuY-jH-v4Z" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ggc-oh-wCC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Jnr-sK-pZZ" kind="relationship" relationship="rootViewController" id="Q94-Dm-o2T"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iyM-qY-IPu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2494" y="1648"/>
+        </scene>
         <!--Show Test-->
         <scene sceneID="cHh-WX-5hY">
             <objects>
@@ -97,11 +132,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sc6-Ow-7NY">
-                                <rect key="frame" x="301" y="28" width="55" height="30"/>
+                                <rect key="frame" x="304" y="28" width="55" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Answer"/>
                                 <connections>
-                                    <segue destination="AJ9-o9-hac" kind="show" id="kjr-Z2-pXl"/>
+                                    <action selector="goNext:" destination="H8U-15-6eC" eventType="touchUpInside" id="dLL-Rq-dl1"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="試卷" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wa7-aS-qxp">
@@ -111,6 +146,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KM4-eJ-hIs">
+                                <rect key="frame" x="16" y="78" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="查閱已繳交試卷"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -126,7 +166,7 @@
         <!--Take Photo-->
         <scene sceneID="1tW-pp-xvs">
             <objects>
-                <viewController id="AJ9-o9-hac" customClass="TakePhoto" customModule="HiSwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AnswerTest" id="AJ9-o9-hac" customClass="TakePhoto" customModule="HiSwift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Qht-bX-Ec4"/>
                         <viewControllerLayoutGuide type="bottom" id="IAc-VX-YJ6"/>

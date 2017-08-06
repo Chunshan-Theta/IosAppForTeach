@@ -81,9 +81,9 @@ class TestList: UITableViewController {
         self.dismiss(animated: true, completion:nil)
     }
     func goNext(){
-        // go old test
-        // let vc = self.storyboard?.instantiateViewController(withIdentifier:"ShowTestEntrance")
-        // self.present(vc!,animated: true,completion: nil)    
+        // go Test
+        let vc = self.storyboard?.instantiateViewController(withIdentifier:"PastTestEntrance")
+        self.present(vc!,animated: true,completion: nil)
     }
     
     
@@ -142,6 +142,9 @@ class TestList: UITableViewController {
         
         //update data
         SelectTestId = Testid[index]
+        
+        
+        AnswerOption = 1
         
         // go to VideoList
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "TestShow")
